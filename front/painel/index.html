@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Controle Finaceiro</title>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <link rel="stylesheet" href="style.css">
+    <link rel="shortcut icon" href="imagens/relatorio-anual.png" type="image/x-icon">
+</head>
+<body>
+
+    <div class="userCont">
+        <div>
+            <p id="hiUser">Olá usuario</p> <img src="imagens/user.png" alt="" width="20px">
+        </div>
+    </div>
+
+    <label for="check">
+        <div class="burguerCont ">
+            <div class="bar bar1 " ></div>
+            <div class="bar bar2 "></div>
+            <div class="bar bar3 "></div>
+            <div id="burguerFull"></div>
+       </div> 
+    </label>
+
+    <div class="navBar">
+      
+         <ul>
+            <li ><a href="" id="resumoPag"> <img src="imagens/dashboard.png" alt="">RESUMO </a></li>
+            <li ><a href="#" id="relatorioPage"> <img src="imagens/relatorio-de-lucro.png" alt="">RELATÓRIO</a></li>
+            <li><a href="#"  id="logout"><img src="imagens/sair.png" alt=""> SAIR </a></li>
+
+         </ul>
+      
+    </div>
+
+    <input type="checkbox" id="check" style="display: none;">
+
+    <main>
+
+        <div class="headerCont">
+
+            <div class="totalCont">
+                <h3>SALDO ATUAL</h3> <p class="total">R$00.00</p>
+            </div>
+            <div class="totalCont">
+                <h4>TOTAL ENTRADAS</h4> <p class="totalEntr">R$00.00</p>
+            </div>
+            <div class="totalCont">
+                <h4>TOTAL DESPESAS</h4> <p class="totalDesp">R$00.00</p>
+        </div>
+        
+
+            <div class="inputCont">
+                <input type="text" placeholder="TITULO" id="titulo">
+                <select name="" id="movimento">
+                    <option value="receita" class="receita" title="Valor que entrou">ENTRADAS</option>
+                    <option value="despesa" class="dispesa" title="Valor que saiu">SAÍDAS</option>
+                </select>
+                <input type="number" placeholder="VALOR" id="valor">
+
+                <button id="adicionar">ADICIONAR</button>
+            </div>
+
+            <div class="tableTitle">
+                <h3>MOVIMENTOS</h3>
+              <!-- <div> <p><img src="imagens/filtro.png" alt="" width="20px"></p><input type="search" class="buscar" placeholder="titulo, data ou valor"></div>-->
+             </div>
+    
+            </div>
+
+
+            <div class="movimentTitle searchCont">
+           
+                <div class="search" >
+                    
+                    <input type="text" placeholder="Buscar" id="titleSearch">
+                    <img src="imagens/lupa.png" width="25px" alt="">
+                </div>
+
+            </div>
+        
+       
+        <div class="painelCont">
+            
+           
+         
+            <div class="movimentsCont movimentTitle">
+                <div>TITULO</div>
+                <div>DATA</div>
+                <div>VALOR</div>
+
+                <div class="actionCont">
+                   AÇÃO
+                </div>
+            </div>
+        </div>
+                 
+    </main>
+
+
+    <section class="resumoCont">
+        <div class="resumo">
+
+            <div id="frontAtual" class="totals">SALDO ATUAL <strong id="resAtual">R$0.00</strong> <img src="imagens/totAtual.png" alt=""></div>
+
+            <div class="totalBase" >
+                <div id="frontEntr" class="totals ">TOTAL ENTRADAS  <strong id="resEntr">R$0.00</strong> <img src="imagens/totEntr.png" alt=""></div>
+                <div id="frontDesp" class="totals">TOTAL DESPESAS  <strong id="resDesp">R$0.00</strong> <img src="imagens/totDesp.png" alt=""></div>
+            </div>
+         
+
+        </div>
+
+    </section>
+
+    <script src="menuBurguer.js"></script>
+    <script src="main.js"></script>
+</body>
+</html>

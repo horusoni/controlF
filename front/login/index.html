@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Login / Cadastro</title>
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <link rel="shortcut icon" href="img/relatorio-anual.png" type="image/x-icon">
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+      background-color: #fff;
+      color: #333;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .container {
+      background-color: #f9f9f9;
+      border: 1px solid #d2d2d2;
+      padding: 40px;
+      border-radius: 8px;
+      width: 100%;
+      max-width: 400px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+      transition: all 0.3s ease;
+    }
+
+    h2 {
+      text-align: left;
+      margin-bottom: 24px;
+      color: #0a7dcc;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+      opacity: 0;
+      transform: translateY(10px);
+      animation: fadeInUp 0.4s ease forwards;
+    }
+
+    .form-group:nth-child(1) { animation-delay: 0.1s; }
+    .form-group:nth-child(2) { animation-delay: 0.2s; }
+    .form-group:nth-child(3) { animation-delay: 0.3s; }
+
+    @keyframes fadeInUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 6px;
+      font-weight: bold;
+    }
+
+    .form-group input {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #d2d2d2;
+      border-radius: 4px;
+    }
+    .form-group input:focus{
+        outline: 1px solid #0a7dcc;
+    }
+
+    .btn {
+      width: 100%;
+      padding: 12px;
+      background-color: #1192e9;
+      border: none;
+      color: white;
+      font-size: 16px;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .btn:hover {
+      background-color: #0a7dcc;
+    }
+
+    .switch-form {
+      text-align: center;
+      margin-top: 20px;
+    }
+
+    .switch-form a {
+      color: #1192e9;
+      text-decoration: none;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .switch-form a:hover {
+      text-decoration: underline;
+    }
+
+    .form-section {
+      display: none;
+      animation: fadeIn 0.4s ease forwards;
+    }
+
+    .form-section.active {
+      display: block;
+    }
+
+    .alertar,.alertarLogin{
+      color: red;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    @media (max-width:800px ){
+        .container{
+            
+            background-color: #fff;
+            box-shadow: none;
+            border: none;
+            width: 90%;
+        }
+        .form-group input {
+            width: 95%;
+            height: 30px;
+        }
+        
+    }
+
+    .winCont{
+      width: 300px;
+      margin: auto;
+      background-color: blue;
+      position: relative;
+      transition: .3s;
+
+    }
+    .win{
+      border-radius: 5px;
+      top: 7%;
+      position: absolute;
+      width: 300px;
+      height: 300px;
+      background-color: #F9F9F9;
+      border: 1px solid #e6e6e6;
+      box-shadow: 0px 2px 3px #e6e6e6;
+      z-index: 10;
+      
+    }
+
+    .win div{
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      color: #0a7dcc;
+    }
+    .win div h3{
+      font-size: 15px;
+      
+    }
+    .hidden{
+      scale: 0;
+    }
+    
+.lds-roller,
+.lds-roller div,
+.lds-roller div:after {
+  box-sizing: border-box;
+}
+.lds-roller {
+  display: inline-block;
+  position: relative;
+  width: 80px;
+  height: 80px;
+}
+.lds-roller div {
+  animation: lds-roller 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+  transform-origin: 40px 40px;
+}
+.lds-roller div:after {
+  content: " ";
+  display: block;
+  position: absolute;
+  width: 7.2px;
+  height: 7.2px;
+  border-radius: 50%;
+  background: currentColor;
+  margin: -3.6px 0 0 -3.6px;
+}
+.lds-roller div:nth-child(1) {
+  animation-delay: -0.036s;
+}
+.lds-roller div:nth-child(1):after {
+  top: 62.62742px;
+  left: 62.62742px;
+}
+.lds-roller div:nth-child(2) {
+  animation-delay: -0.072s;
+}
+.lds-roller div:nth-child(2):after {
+  top: 67.71281px;
+  left: 56px;
+}
+.lds-roller div:nth-child(3) {
+  animation-delay: -0.108s;
+}
+.lds-roller div:nth-child(3):after {
+  top: 70.90963px;
+  left: 48.28221px;
+}
+.lds-roller div:nth-child(4) {
+  animation-delay: -0.144s;
+}
+.lds-roller div:nth-child(4):after {
+  top: 72px;
+  left: 40px;
+}
+.lds-roller div:nth-child(5) {
+  animation-delay: -0.18s;
+}
+.lds-roller div:nth-child(5):after {
+  top: 70.90963px;
+  left: 31.71779px;
+}
+.lds-roller div:nth-child(6) {
+  animation-delay: -0.216s;
+}
+.lds-roller div:nth-child(6):after {
+  top: 67.71281px;
+  left: 24px;
+}
+.lds-roller div:nth-child(7) {
+  animation-delay: -0.252s;
+}
+.lds-roller div:nth-child(7):after {
+  top: 62.62742px;
+  left: 17.37258px;
+}
+.lds-roller div:nth-child(8) {
+  animation-delay: -0.288s;
+}
+.lds-roller div:nth-child(8):after {
+  top: 56px;
+  left: 12.28719px;
+}
+
+
+
+@keyframes lds-roller {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+
+@media (max-width:600px){
+  .win{
+    height: 500px;
+    
+  }
+}
+  </style>
+</head>
+<body>
+ 
+ 
+  <div class="container">
+    <section class="winCont hidden">
+      <section class="win">
+        <div> 
+           <h3>CADASTRADO COM SUCESSO!</h3>
+           <img src="img/marca.png" alt="" width="50px">
+          
+        </div>
+      
+      </section>
+    </section>
+    <!-- Login -->
+    <div id="login-form" class="form-section active">
+      <h2>Entrar</h2>
+
+        <div class="form-group">
+          <label for="login-email">E-mail</label>
+          <input type="email" id="login-email" class="email"  required />
+        </div>
+        <div class="form-group">
+          <label for="login-password">Senha</label>
+          <input type="password" id="login-password" class="senha" required />
+        </div>
+        <div class="form-group">
+          <button class="btn" type="submit" id="login">Login</button>
+        </div>
+    
+      <div class="switch-form">
+        <p>Não tem uma conta? <a onclick="mostrarCadastro()">Crie uma agora</a></p>
+      </div>
+      <div class="alertarLogin"></div>
+
+     
+     
+ 
+    </div>
+
+    <!-- Cadastro -->
+    <div id="cadastro-form" class="form-section">
+      <h2>Criar Conta</h2>
+     
+        <div class="form-group">
+          <label for="cadastro-nome">Nome</label>
+          <input type="text" id="cadastro-nome" class="nomeCad" required />
+        </div>
+        <div class="form-group">
+          <label for="cadastro-email">E-mail</label>
+          <input type="email" id="cadastro-email" class="emailCad" required />
+        </div>
+        <div class="form-group">
+          <label for="cadastro-password">Senha</label>
+          <input type="password" id="cadastro-password" class="passOneCad" required />
+        </div>
+        <div class="form-group">
+            <label for="cadastro-password">Confirmar senha</label>
+            <input type="password" id="cadastro-password" class="passTwoCad" required />
+          </div>
+        <div class="form-group">
+          <button class="btn" type="submit" id="cadastrar">Cadastrar</button>
+        </div>
+      
+      <div class="switch-form">
+        <p>Já tem uma conta? <a onclick="mostrarLogin()">Fazer login</a></p>
+      </div>
+      <span class="alertar"></span>
+    </div>
+  </div>
+
+  
+
+  <script src="main.js"></script>
+
+  <script>
+    function mostrarCadastro() {
+      document.getElementById('login-form').classList.remove('active');
+      document.getElementById('cadastro-form').classList.add('active');
+    }
+
+    function mostrarLogin() {
+      document.getElementById('cadastro-form').classList.remove('active');
+      document.getElementById('login-form').classList.add('active');
+    }
+  </script>
+</body>
+</html>
