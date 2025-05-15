@@ -11,7 +11,7 @@ const app = express();
 app.use(express.json());
 
 app.use(cors({
-    origin: 'http://192.168.1.10:5500', // ajuste futuramente 
+    origin: 'https://control-f.vercel.app', // ajuste futuramente 
     credentials: true
 }));
 

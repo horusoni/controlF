@@ -1,9 +1,9 @@
-const host = 'http://192.168.1.10:8081'
+const host = 'https://control-f.vercel.app'
 
 window.onload = async () => {
     loadResume()
     
-    const loginPage = '/front/login/index.html'
+    const loginPage = '/login/index.html'
 
     const token = localStorage.getItem("token");
     if (!token) return location.href = loginPage;
@@ -168,7 +168,7 @@ const logout = () => {
     localStorage.removeItem('visible') //remove a function de carregar relatorio
     localStorage.removeItem('despesaTot')
     localStorage.removeItem('receitaTot')
-    location.href = '/front/login/index.html'; // Redireciona para login
+    location.href = '/login/index.html'; // Redireciona para login
     }
 
 const deletar = async (id) => {

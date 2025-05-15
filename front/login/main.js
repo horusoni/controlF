@@ -1,4 +1,4 @@
-const host = 'http://192.168.1.10:8081'
+const host = 'https://control-f.vercel.app'
 
 document.addEventListener('click',(e)=>{
     if(e.target.id === 'cadastrar'){
@@ -79,7 +79,7 @@ const span = async (res)=>{
 const redirectVerify = (res) => {
     if (res.data.login) {
         localStorage.setItem("token", res.data.token);
-        location.href = "/front/painel/index.html";
+        location.href = "/painel/index.html";
 
 
     }else{
