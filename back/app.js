@@ -11,7 +11,7 @@ const app = express();
 app.use(express.json());
 
 app.use(cors({
-    origin: 'https://control-f.vercel.app', // ajuste futuramente 
+    origin: 'https://control-f.netlify.app', // ajuste futuramente 
     credentials: true
 }));
 
@@ -34,6 +34,9 @@ app.post('/delete', authMiddleware , (req,res) => {
     deletarLinha(req,res)
 })
 
+app.get('/teste', (req,res)=>{
+    res.send('ok')
+})
 
 
 
